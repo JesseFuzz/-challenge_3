@@ -5,11 +5,12 @@ homepage:
 
 environment:
   sdk: '>=2.18.2 <3.0.0'
-  flutter: ">=1.17.0"
+  flutter: '>=1.17.0'
 
 dependencies:
   flutter:
     sdk: flutter
+  flutterando_analysis: ^0.0.2
 
 dev_dependencies:
   flutter_test:
