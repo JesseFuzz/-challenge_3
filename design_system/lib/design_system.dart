@@ -1,7 +1,4 @@
 library design_system;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/widgets/buttons/options_button_widget.dart';
+export 'src/widgets/search_bars/search_bar_widget.dart';
