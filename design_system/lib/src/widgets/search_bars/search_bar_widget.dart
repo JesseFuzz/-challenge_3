@@ -1,3 +1,4 @@
+import 'package:design_system/src/theme/custom_text_theme.dart';
 import 'package:flutter/material.dart';
 
 class SearchBarWidget extends StatelessWidget {
@@ -6,7 +7,7 @@ class SearchBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final theme = Theme.of(context);
+    final customTextTheme = Theme.of(context).extension<CustomTextTheme>()!;
     return Container(
       margin: EdgeInsets.only(
         top: screenSize.width * (46 / 375),
@@ -29,8 +30,8 @@ class SearchBarWidget extends StatelessWidget {
           label: Text(
             'Search',
             style: TextStyle(
-              color: theme.colorScheme.secondary,
-              fontSize: 20,
+              color: Colors.white,
+              fontSize: customTextTheme.h6,
               // height: 0.1,
             ),
           ),

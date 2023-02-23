@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../theme/custom_color_theme.dart';
 
 class CallButtonWidget extends StatelessWidget {
   final Widget icon;
@@ -8,17 +9,21 @@ class CallButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     const screenSizeWidth = 375;
+    final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
     return InkWell(
       child: Container(
-        margin: EdgeInsets.only(),
-        height: screenSize.width * (60 / screenSizeWidth),
-        width: screenSize.width * (60 / screenSizeWidth),
-        decoration: BoxDecoration(
-          color: const Color(0xFF6D67E1),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: icon as Icon,
-      ),
+          margin: EdgeInsets.only(),
+          height: screenSize.width * (60 / screenSizeWidth),
+          width: screenSize.width * (60 / screenSizeWidth),
+          decoration: BoxDecoration(
+            color: customColorTheme.onSurface,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: icon as Icon ??
+              Icon(
+                Icons.phone_in_talk,
+                color: Colors.white,
+              )),
     );
   }
 }
