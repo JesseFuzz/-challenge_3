@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: MyThemeData.myTheme,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -27,10 +28,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var isDown = true;
+  var height = 370.0;
   @override
   Widget build(BuildContext context) {
+    final sizeScreen = MediaQuery.of(context).size;
     return const Scaffold(
-      body: Center(),
+      backgroundColor: Colors.brown,
+      body: CustomExpansionTileWidget(),
     );
   }
 }

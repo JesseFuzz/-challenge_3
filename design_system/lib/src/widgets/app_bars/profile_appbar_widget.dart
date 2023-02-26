@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../theme/custom_color_theme.dart';
+
 class ProfileWidgetAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   const ProfileWidgetAppBar({super.key});
@@ -10,13 +12,13 @@ class ProfileWidgetAppBar extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-
+    final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
     return Container(
       height: screenSize.width * (98 / 375),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: const Color(0xFF16171B),
-        borderRadius: BorderRadius.only(
+        color: customColorTheme.primaryVariant,
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
@@ -34,13 +36,13 @@ class ProfileWidgetAppBar extends StatelessWidget
               onPressed: () {},
               icon: Icon(
                 Icons.person,
-                color: Colors.white,
+                color: customColorTheme.onPrimary,
               ),
             ),
           ),
           Text(
             'Russel Hue',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: customColorTheme.onPrimary),
           ),
           Container(
             alignment: Alignment.center,
@@ -53,17 +55,17 @@ class ProfileWidgetAppBar extends StatelessWidget
             child: Text(
               'Agree to Offer',
               style: TextStyle(
-                color: Colors.white,
+                color: customColorTheme.onPrimary,
               ),
             ),
           ),
           Icon(
             Icons.emoji_emotions_outlined,
-            color: Colors.white,
+            color: customColorTheme.onPrimary,
           ),
           Icon(
             Icons.emoji_objects_outlined,
-            color: Colors.white,
+            color: customColorTheme.onPrimary,
           ),
         ],
       ),

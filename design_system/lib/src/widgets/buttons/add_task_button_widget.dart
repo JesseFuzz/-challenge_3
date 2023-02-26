@@ -22,7 +22,6 @@ class _AddTaskButtonWidgetState extends State<AddTaskButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final teste = Theme.of(context);
     final theme = MyThemeData.myTheme;
     return FloatingActionButton(
       tooltip: 'Adicionar Tarefa',
