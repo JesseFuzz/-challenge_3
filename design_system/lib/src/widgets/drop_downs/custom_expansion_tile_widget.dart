@@ -1,8 +1,6 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
-import '../../theme/custom_color_theme.dart';
-
 class CustomExpansionTileWidget extends StatefulWidget {
   final int quantity;
   const CustomExpansionTileWidget({super.key, required this.quantity});
@@ -19,7 +17,7 @@ class _CustomExpansionTileWidgetState extends State<CustomExpansionTileWidget> {
     final quantity = widget.quantity;
 
     final screenSize = MediaQuery.of(context).size;
-    final isOpen = ValueNotifier(false);
+    final isOpen = ValueNotifier(true);
     final colorsTheme = Theme.of(context).extension<CustomColorTheme>()!;
     return InkWell(
       onTap: () {
@@ -50,7 +48,7 @@ class _CustomExpansionTileWidgetState extends State<CustomExpansionTileWidget> {
                     ),
                     AnimatedRotation(
                       turns: isOpen.value ? turns += 0.5 : turns += 0.5,
-                      duration: Duration(milliseconds: 200),
+                      duration: const Duration(milliseconds: 200),
                       child: Icon(
                         Icons.keyboard_arrow_down_rounded,
                         color: colorsTheme.onPrimary,

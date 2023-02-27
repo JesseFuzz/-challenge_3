@@ -1,6 +1,5 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-
-import '../../utils/routes/app_routes.dart';
 
 class ChatListPage extends StatefulWidget {
   const ChatListPage({super.key});
@@ -12,19 +11,33 @@ class ChatListPage extends StatefulWidget {
 class _ChatListPageState extends State<ChatListPage> {
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
+    final customTextTheme = Theme.of(context).extension<CustomTextTheme>();
     return Scaffold(
-      body: Center(
-        child: IconButton(
-            onPressed: () => Navigator.pushNamed(
-                  context,
-                  AppRoutes().chatPage,
-                ),
-            icon: Icon(
-              Icons.chat_bubble,
-              color: Colors.blue,
-              size: 50,
-            )),
+      backgroundColor: customColorTheme.primary,
+      extendBody: true,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SearchBarWidget(),
+            SizedBox(
+              height: screenSize.width * (46 / 375),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: (context, index) => const OptionButtonWidget(),
+              ),
+            ),
+            const CustomExpansionTileWidget(quantity: 2),
+            const CustomExpansionTileWidget(quantity: 2),
+            const CustomExpansionTileWidget(quantity: 2),
+            const CustomExpansionTileWidget(quantity: 2),
+            const CustomExpansionTileWidget(quantity: 2),
+          ],
+        ),
       ),
+      bottomNavigationBar: const CustomBottomBarWidget(),
     );
   }
 }

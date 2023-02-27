@@ -11,7 +11,7 @@ class OptionButtonWidget extends StatefulWidget {
 }
 
 class _OptionButtonWidgetState extends State<OptionButtonWidget> {
-  bool isSelected = true;
+  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
