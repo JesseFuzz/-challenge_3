@@ -12,18 +12,14 @@ class CallButtonWidget extends StatelessWidget {
     final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
     return InkWell(
       child: Container(
-          margin: EdgeInsets.only(),
-          height: screenSize.width * (60 / screenSizeWidth),
-          width: screenSize.width * (60 / screenSizeWidth),
-          decoration: BoxDecoration(
-            color: customColorTheme.onSurface,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: icon as Icon ??
-              Icon(
-                Icons.phone_in_talk,
-                color: Colors.white,
-              )),
+        height: screenSize.width * (60 / screenSizeWidth),
+        width: screenSize.width * (60 / screenSizeWidth),
+        decoration: BoxDecoration(
+          color: customColorTheme.onSurface,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: icon as Icon,
+      ),
     );
   }
 }

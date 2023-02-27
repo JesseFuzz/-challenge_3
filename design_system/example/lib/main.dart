@@ -107,7 +107,7 @@ class HotreloadWidgetbook extends StatelessWidget {
               useCases: [
                 WidgetbookUseCase(
                   name: 'contact information',
-                  builder: (context) => const ContactInformationCard(),
+                  builder: (context) => const ContactInformationCardWidget(),
                 ),
               ],
             ),

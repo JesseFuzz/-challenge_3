@@ -13,7 +13,6 @@ class _ChatListPageState extends State<ChatListPage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
-    final customTextTheme = Theme.of(context).extension<CustomTextTheme>();
     return Scaffold(
       backgroundColor: customColorTheme.primary,
       extendBody: true,

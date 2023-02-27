@@ -25,11 +25,10 @@ class ProfileWidgetAppBar extends StatelessWidget
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Colors.amber,
+              color: customColorTheme.onSurface,
               borderRadius: BorderRadius.circular(20),
             ),
             child: IconButton(
@@ -49,7 +48,7 @@ class ProfileWidgetAppBar extends StatelessWidget
             height: screenSize.width * (40 / 375),
             width: screenSize.width * (116 / 375),
             decoration: BoxDecoration(
-              color: Color(0xFF262626),
+              color: customColorTheme.primary,
               borderRadius: BorderRadius.circular(14),
             ),
             child: Text(

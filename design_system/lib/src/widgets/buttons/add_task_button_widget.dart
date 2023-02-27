@@ -13,12 +13,13 @@ class _AddTaskButtonWidgetState extends State<AddTaskButtonWidget> {
       DateTime.now();
 
   Future<DateTime?> pickDate() => showDatePicker(
-      context: context,
-      initialDate:
-          // DateTime(2023, 02, 06),
-          dateTime,
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2100));
+        context: context,
+        initialDate:
+            // DateTime(2023, 02, 06),
+            dateTime,
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2100),
+      );
 
   @override
   Widget build(BuildContext context) {

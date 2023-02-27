@@ -5,7 +5,13 @@ import 'custom_text_theme.dart';
 class MyThemeData {
   static ThemeData myTheme = ThemeData.light().copyWith(
     extensions: <ThemeExtension<dynamic>>[
-      CustomTextTheme(h6: 20, caption: 12, subtitle1: 16),
+      CustomTextTheme(
+        h5: 24,
+        h6: 20,
+        caption: 12,
+        subtitle1: 16,
+        subtitle2: 14,
+      ),
       CustomColorTheme(
         //cor principal
         primary: const Color(0xFF20232B),

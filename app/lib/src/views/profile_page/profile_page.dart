@@ -1,4 +1,4 @@
-import 'package:app/src/utils/routes/app_routes.dart';
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -11,19 +11,51 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
+    final customTextTheme = Theme.of(context).extension<CustomTextTheme>()!;
     return Scaffold(
-      body: Center(
-        child: IconButton(
-            onPressed: () => Navigator.pushNamed(
-                  context,
-                  AppRoutes().chatListPage,
-                ),
-            icon: Icon(
-              Icons.person_off_outlined,
-              color: Colors.blue,
-              size: 50,
-            )),
+      backgroundColor: customColorTheme.primary,
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            ContactInformationCardWidget(),
+            TaskItemWidget(),
+            SizedBox(
+              height: 10,
+            ),
+            TaskItemWidget(),
+            SizedBox(
+              height: 10,
+            ),
+            TaskItemWidget(),
+            SizedBox(
+              height: 10,
+            ),
+            TaskItemWidget(),
+            SizedBox(
+              height: 10,
+            ),
+            TaskItemWidget(),
+            SizedBox(
+              height: 10,
+            ),
+            TaskItemWidget(),
+            SizedBox(
+              height: 10,
+            ),
+            TaskItemWidget(),
+            SizedBox(
+              height: 10,
+            ),
+            TaskItemWidget(),
+            SizedBox(
+              height: 10,
+            ),
+          ],
+        ),
       ),
+      floatingActionButton: const AddTaskButtonWidget(),
     );
   }
 }

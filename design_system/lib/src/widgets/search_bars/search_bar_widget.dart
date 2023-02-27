@@ -1,5 +1,6 @@
-import 'package:design_system/src/theme/custom_text_theme.dart';
 import 'package:flutter/material.dart';
+
+import '../../../design_system.dart';
 
 class SearchBarWidget extends StatelessWidget {
   const SearchBarWidget({super.key});
@@ -7,6 +8,7 @@ class SearchBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
     final customTextTheme = Theme.of(context).extension<CustomTextTheme>()!;
     return Container(
       margin: EdgeInsets.only(
@@ -18,19 +20,19 @@ class SearchBarWidget extends StatelessWidget {
       height: screenSize.width * (60 / 375),
       width: screenSize.width * (336 / 375),
       decoration: BoxDecoration(
-        color: const Color(0xFF16171B),
+        color: customColorTheme.primaryVariant,
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextFormField(
-        style: const TextStyle(
-          color: Colors.white,
+        style: TextStyle(
+          color: customColorTheme.onPrimary,
         ),
         decoration: InputDecoration(
           border: InputBorder.none,
           label: Text(
             'Search',
             style: TextStyle(
-              color: Colors.white,
+              color: customColorTheme.onPrimary,
               fontSize: customTextTheme.h6,
               // height: 0.1,
             ),
