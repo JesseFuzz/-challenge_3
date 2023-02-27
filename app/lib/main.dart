@@ -31,9 +31,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final sizeScreen = MediaQuery.of(context).size;
-    return const Scaffold(
-      body: CustomExpansionTileWidget(
-        quantity: 2,
+    return Scaffold(
+      body: Column(
+        children: [
+          CustomExpansionTileWidget(
+            quantity: 2,
+          ),
+          CustomExpansionTileWidget(
+            quantity: 2,
+          ),
+        ],
       ),
     );
   }

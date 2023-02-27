@@ -15,8 +15,9 @@ class CustomExpansionTileWidget extends StatefulWidget {
 class _CustomExpansionTileWidgetState extends State<CustomExpansionTileWidget> {
   @override
   Widget build(BuildContext context) {
-    double turns = 0.0;
+    var turns = 0.0;
     final quantity = widget.quantity;
+
     final screenSize = MediaQuery.of(context).size;
     final isOpen = ValueNotifier(false);
     final colorsTheme = Theme.of(context).extension<CustomColorTheme>()!;
