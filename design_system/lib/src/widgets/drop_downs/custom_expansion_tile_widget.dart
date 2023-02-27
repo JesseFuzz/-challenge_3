@@ -1,7 +1,11 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
+import '../../theme/custom_color_theme.dart';
+
 class CustomExpansionTileWidget extends StatefulWidget {
-  const CustomExpansionTileWidget({super.key});
+  final int quantity;
+  const CustomExpansionTileWidget({super.key, required this.quantity});
 
   @override
   State<CustomExpansionTileWidget> createState() =>
@@ -11,18 +15,26 @@ class CustomExpansionTileWidget extends StatefulWidget {
 class _CustomExpansionTileWidgetState extends State<CustomExpansionTileWidget> {
   @override
   Widget build(BuildContext context) {
+    final quantity = widget.quantity;
     final screenSize = MediaQuery.of(context).size;
     final isOpen = ValueNotifier(false);
+    final colorsTheme = Theme.of(context).extension<CustomColorTheme>()!;
     return InkWell(
       onTap: () {
         isOpen.value = !isOpen.value;
       },
       child: AnimatedBuilder(
         animation: isOpen,
-        builder: (context, Widget) => Container(
-          height: screenSize.width * ((isOpen.value ? 200 : 18) / 375),
-          width: screenSize.width * (328 / 375),
-          color: Colors.white,
+        builder: (context, widget) => AnimatedContainer(
+          duration: const Duration(milliseconds: 120),
+
+          height: screenSize.width *
+              ((isOpen.value
+                      ? (screenSize.width * ((102 * quantity) / 375))
+                      : 18) /
+                  375),
+          // width: screenSize.width * (350 / 375),
+          color: colorsTheme.primary,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
@@ -30,26 +42,34 @@ class _CustomExpansionTileWidgetState extends State<CustomExpansionTileWidget> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Unread'),
+                    Text(
+                      'Unread',
+                      style: TextStyle(color: colorsTheme.onPrimary),
+                    ),
                     AnimatedBuilder(
                       animation: isOpen,
                       builder: (context, widget) => Icon(
                         isOpen.value
                             ? Icons.keyboard_arrow_up_rounded
                             : Icons.keyboard_arrow_down_rounded,
+                        color: colorsTheme.onPrimary,
                         size: screenSize.width * (18 / 375),
-                        color: Colors.black,
                       ),
                     ),
                   ],
                 ),
                 AnimatedBuilder(
                   animation: isOpen,
-                  builder: (context, Widget) {
+                  builder: (context, widget) {
                     if (isOpen.value) {
-                      return const ExpandedCollumnWidget();
+                      return Column(
+                        children: const [
+                          MessageListItemWidget(),
+                          MessageListItemWidget(),
+                        ],
+                      );
                     }
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   },
                 )
               ],
@@ -57,26 +77,6 @@ class _CustomExpansionTileWidgetState extends State<CustomExpansionTileWidget> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class ExpandedCollumnWidget extends StatefulWidget {
-  const ExpandedCollumnWidget({super.key});
-
-  @override
-  State<ExpandedCollumnWidget> createState() => _ExpandedCollumnWidgetState();
-}
-
-class _ExpandedCollumnWidgetState extends State<ExpandedCollumnWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: const [
-        Text('data'),
-        Text('data'),
-      ],
     );
   }
 }

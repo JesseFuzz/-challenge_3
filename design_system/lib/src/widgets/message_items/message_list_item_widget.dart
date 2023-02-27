@@ -15,7 +15,7 @@ class _MessageListItemWidgetState extends State<MessageListItemWidget> {
     final screenSize = MediaQuery.of(context).size;
     return InkWell(
       child: Padding(
-        padding: EdgeInsets.all(screenSize.width * (12 / 375)),
+        padding: EdgeInsets.all(screenSize.width * (4 / 375)),
         child: Container(
           margin: EdgeInsets.only(
             top: screenSize.width * (25 / 375),

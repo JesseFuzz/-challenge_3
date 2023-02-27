@@ -28,14 +28,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var isDown = true;
-  var height = 370.0;
   @override
   Widget build(BuildContext context) {
     final sizeScreen = MediaQuery.of(context).size;
     return const Scaffold(
-      backgroundColor: Colors.brown,
-      body: CustomExpansionTileWidget(),
+      body: CustomExpansionTileWidget(
+        quantity: 2,
+      ),
     );
   }
 }
