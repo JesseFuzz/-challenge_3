@@ -9,7 +9,7 @@ class AppRoutes {
   final profilePage = '/profilePage';
 
   Map<String, Widget Function(BuildContext)> pages() {
-    Map<String, Widget Function(BuildContext)> pages = {
+    final pages = <String, Widget Function(BuildContext)>{
       profilePage: (context) => const ProfilePage(),
       chatListPage: (context) => const ChatListPage(),
       chatPage: (context) => const ChatPage(),
