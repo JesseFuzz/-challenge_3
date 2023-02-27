@@ -1,10 +1,10 @@
+import 'package:app/main.dart';
 import 'package:flutter/material.dart';
 
 import '../online_badges/online_badge_widget.dart';
 
 class MessageListItemWidget extends StatefulWidget {
-  final dynamic route;
-  const MessageListItemWidget({super.key, this.route});
+  const MessageListItemWidget({super.key});
 
   @override
   State<MessageListItemWidget> createState() => _MessageListItemWidgetState();
@@ -28,7 +28,7 @@ class _MessageListItemWidgetState extends State<MessageListItemWidget> {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  widget.route.profilePage,
+                  AppRoutes().profilePage,
                 );
               },
               child: Stack(
@@ -78,7 +78,10 @@ class _MessageListItemWidgetState extends State<MessageListItemWidget> {
             ),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, '/third');
+                Navigator.pushNamed(
+                  context,
+                  AppRoutes().chatPage,
+                );
               },
               child: SizedBox(
                 width: screenSize.width * (244 / 375),
