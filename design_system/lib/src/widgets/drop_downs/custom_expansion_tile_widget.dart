@@ -2,8 +2,7 @@ import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 class CustomExpansionTileWidget extends StatefulWidget {
-  final int quantity;
-  const CustomExpansionTileWidget({super.key, required this.quantity});
+  const CustomExpansionTileWidget({super.key});
 
   @override
   State<CustomExpansionTileWidget> createState() =>
@@ -14,7 +13,7 @@ class _CustomExpansionTileWidgetState extends State<CustomExpansionTileWidget> {
   @override
   Widget build(BuildContext context) {
     var turns = 0.0;
-    final quantity = widget.quantity;
+    const quantity = 2;
 
     final screenSize = MediaQuery.of(context).size;
     final isOpen = ValueNotifier(true);
