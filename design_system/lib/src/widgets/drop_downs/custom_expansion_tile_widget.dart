@@ -15,6 +15,7 @@ class CustomExpansionTileWidget extends StatefulWidget {
 class _CustomExpansionTileWidgetState extends State<CustomExpansionTileWidget> {
   @override
   Widget build(BuildContext context) {
+    double turns = 0.0;
     final quantity = widget.quantity;
     final screenSize = MediaQuery.of(context).size;
     final isOpen = ValueNotifier(false);
@@ -46,16 +47,15 @@ class _CustomExpansionTileWidgetState extends State<CustomExpansionTileWidget> {
                       'Unread',
                       style: TextStyle(color: colorsTheme.onPrimary),
                     ),
-                    AnimatedBuilder(
-                      animation: isOpen,
-                      builder: (context, widget) => Icon(
-                        isOpen.value
-                            ? Icons.keyboard_arrow_up_rounded
-                            : Icons.keyboard_arrow_down_rounded,
+                    AnimatedRotation(
+                      turns: isOpen.value ? turns += 0.5 : turns += 0.5,
+                      duration: Duration(milliseconds: 200),
+                      child: Icon(
+                        Icons.keyboard_arrow_down_rounded,
                         color: colorsTheme.onPrimary,
                         size: screenSize.width * (18 / 375),
                       ),
-                    ),
+                    )
                   ],
                 ),
                 AnimatedBuilder(
