@@ -9,14 +9,11 @@ class AddTaskButtonWidget extends StatefulWidget {
 }
 
 class _AddTaskButtonWidgetState extends State<AddTaskButtonWidget> {
-  DateTime dateTime = // DateTime(2023, 02, 06);
-      DateTime.now();
+  DateTime dateTime = DateTime.now();
 
   Future<DateTime?> pickDate() => showDatePicker(
         context: context,
-        initialDate:
-            // DateTime(2023, 02, 06),
-            dateTime,
+        initialDate: dateTime,
         firstDate: DateTime(1900),
         lastDate: DateTime(2100),
       );
@@ -46,68 +43,23 @@ class _AddTaskButtonWidgetState extends State<AddTaskButtonWidget> {
               ),
               MaterialButton(
                 color: Colors.yellow,
-                onPressed: (() async {
+                onPressed: () async {
                   final date = await pickDate();
-                  if (date == null) return; //quando apertar cancel
+                  if (date == null) return;
                   setState(() => dateTime = date);
-                  // if (date != null) {
-                  //   setState(
-                  //     () {
-                  //       dateTime = date;
-                  //     },
-                  //   );
-                  // }
-
-                  // showDatePicker(
-                  //   context: context,
-                  //   initialDate: DateTime.now(),
-                  //   firstDate: DateTime(1900),
-                  //   lastDate: DateTime(2100),
-                  // );
-                }),
-                child:
-                    Text('${dateTime.day}/${dateTime.month}/${dateTime.year}'),
+                },
+                child: Text(
+                    'Selecione a data:  ${dateTime.day}/${dateTime.month}'),
               ),
-
-              Spacer(),
+              const Spacer(),
               ElevatedButton(
                 child: const Text('Fechar edição'),
                 onPressed: () => Navigator.pop(context),
               ),
-
               Text('${dateTime.day}/${dateTime.month}/${dateTime.year}')
-              // DatePickerDialog(
-              //   initialDate: DateTime.fromMillisecondsSinceEpoch(Object as int),
-              //   firstDate: DateTime(2021),
-              //   lastDate: DateTime(2022),
-              // )
             ],
           ),
         );
-
-        // showCupertinoModalPopup(
-        //   context: context,
-        //   builder: (context) => Center(
-        //     child: Container(
-        //       height: 250,
-        //       width: 250,
-        //       decoration: BoxDecoration(
-        //         borderRadius: BorderRadius.circular(20),
-        //         color: Color(0xFFF3FC8A),
-        //       ),
-        //       child: Column(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //             CupertinoTextFormFieldRow(
-        //               placeholder: 'Tarefa',
-        //             ),
-        //             CupertinoTextFormFieldRow(
-        //               placeholder: 'Prazo',
-        //             ),
-        //           ]),
-        //     ),
-        //   ),
-        // );
       },
       child: const Icon(Icons.add),
     );
