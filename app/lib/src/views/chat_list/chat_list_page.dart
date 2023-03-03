@@ -1,3 +1,4 @@
+import 'package:app/src/utils/mocks/options_model_mock.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class _ChatListPageState extends State<ChatListPage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
+    final optionsModel = OptionsModelMock.getOptions();
     return Scaffold(
       backgroundColor: customColorTheme.primary,
       extendBody: true,
@@ -24,8 +26,10 @@ class _ChatListPageState extends State<ChatListPage> {
               height: screenSize.width * (46 / 375),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) => const OptionButtonWidget(),
+                itemCount: optionsModel.length,
+                itemBuilder: (context, index) => OptionButtonWidget(
+                  optionsModel: optionsModel[index],
+                ),
               ),
             ),
             const CustomExpansionTileWidget(),

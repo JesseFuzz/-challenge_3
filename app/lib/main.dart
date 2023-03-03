@@ -1,6 +1,9 @@
 import 'package:app/src/utils/routes/app_routes.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
+export 'src/models/contact_model.dart';
+export 'src/models/options_model.dart';
+export 'src/utils/mocks/contact_model_mock.dart';
 export 'src/utils/routes/app_routes.dart';
 
 void main() {

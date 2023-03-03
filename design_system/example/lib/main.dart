@@ -1,3 +1,4 @@
+import 'package:app/main.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
@@ -51,7 +52,14 @@ class HotreloadWidgetbook extends StatelessWidget {
               useCases: [
                 WidgetbookUseCase(
                   name: 'Options',
-                  builder: (context) => const OptionButtonWidget(),
+                  builder: (context) => OptionButtonWidget(
+                    optionsModel: OptionsModel(
+                      name: 'all',
+                      unreadMessages: '35',
+                      icon: const Icon(Icons.chat),
+                      isSelected: true,
+                    ),
+                  ),
                 ),
               ],
             ),

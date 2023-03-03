@@ -1,3 +1,5 @@
+import 'package:app/src/models/contact_model.dart';
+import 'package:app/src/utils/mocks/contact_model_mock.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +16,7 @@ class _ProfilePageState extends State<ProfilePage> {
     final screenSize = MediaQuery.of(context).size;
     final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
     final customTextTheme = Theme.of(context).extension<CustomTextTheme>()!;
+
     return Scaffold(
       backgroundColor: customColorTheme.primary,
       body: SingleChildScrollView(
