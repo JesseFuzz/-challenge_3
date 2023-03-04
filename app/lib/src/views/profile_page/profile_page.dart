@@ -9,14 +9,47 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  DateTime _date = DateTime.now();
+  TimeOfDay _time = TimeOfDay.now();
+
+  void _showDatePicker() async {
+    await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2100),
+    ).then((value) {
+      setState(() {
+        _date = value!;
+        print(_date);
+      });
+    });
+  }
+
+  void _showTimePicker() async {
+    await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+      errorInvalidText: 'Horário inválido',
+    ).then((
+      value, {
+      errorInvalidText,
+    }) {
+      setState(() {
+        if (_time.hour.toDouble() > value!.hour.toDouble()) {
+          return errorInvalidText;
+        }
+        _time = value;
+        print(_time);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
     final customTextTheme = Theme.of(context).extension<CustomTextTheme>()!;
-
-    DateTime date = DateTime.now();
-    TimeOfDay time = TimeOfDay.now();
 
     return Scaffold(
       backgroundColor: customColorTheme.primary,
@@ -88,37 +121,23 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton(
-                            onPressed: () async {
-                              var selectedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime(2100),
-                              );
-                              if (selectedDate != null) {
-                                setState(() {
-                                  selectedDate = date;
-                                });
-                              }
-                            },
-                            child: const Icon(Icons.calendar_today),
+                            onPressed: _showDatePicker,
+                            child: Column(
+                              children: [
+                                const Icon(Icons.calendar_today),
+                              ],
+                            ),
                           ),
                           SizedBox(
                             width: screenSize.width * 0.1,
                           ),
                           ElevatedButton(
-                            onPressed: () async {
-                              var selectedTime = await showTimePicker(
-                                context: context,
-                                initialTime: TimeOfDay.now(),
-                              );
-                              if (selectedTime != null) {
-                                setState(() {
-                                  selectedTime = time;
-                                });
-                              }
-                            },
-                            child: const Icon(Icons.timer),
+                            onPressed: _showTimePicker,
+                            child: Column(
+                              children: [
+                                Icon(Icons.timer),
+                              ],
+                            ),
                           )
                         ],
                       ),
