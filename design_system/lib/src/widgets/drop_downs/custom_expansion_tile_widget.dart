@@ -18,59 +18,62 @@ class _CustomExpansionTileWidgetState extends State<CustomExpansionTileWidget> {
     final screenSize = MediaQuery.of(context).size;
     final isOpen = ValueNotifier(true);
     final colorsTheme = Theme.of(context).extension<CustomColorTheme>()!;
-    return InkWell(
-      onTap: () {
-        isOpen.value = !isOpen.value;
-      },
-      child: AnimatedBuilder(
-        animation: isOpen,
-        builder: (context, widget) => AnimatedContainer(
-          duration: const Duration(milliseconds: 120),
+    return Padding(
+      padding: const EdgeInsets.only(top: 16),
+      child: InkWell(
+        onTap: () {
+          isOpen.value = !isOpen.value;
+        },
+        child: AnimatedBuilder(
+          animation: isOpen,
+          builder: (context, widget) => AnimatedContainer(
+            duration: const Duration(milliseconds: 120),
 
-          height: screenSize.width *
-              ((isOpen.value
-                      ? (screenSize.width * ((102 * quantity) / 375))
-                      : 18) /
-                  375),
-          // width: screenSize.width * (350 / 375),
-          color: colorsTheme.primary,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Unread',
-                      style: TextStyle(color: colorsTheme.onPrimary),
-                    ),
-                    AnimatedRotation(
-                      turns: isOpen.value ? turns += 0.5 : turns += 0.5,
-                      duration: const Duration(milliseconds: 200),
-                      child: Icon(
-                        Icons.keyboard_arrow_down_rounded,
-                        color: colorsTheme.onPrimary,
-                        size: screenSize.width * (18 / 375),
+            height: screenSize.width *
+                ((isOpen.value
+                        ? (screenSize.width * ((108 * quantity) / 375))
+                        : 18) /
+                    375),
+            // width: screenSize.width * (350 / 375),
+            color: colorsTheme.primary,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Unread',
+                        style: TextStyle(color: colorsTheme.onPrimary),
                       ),
-                    )
-                  ],
-                ),
-                AnimatedBuilder(
-                  animation: isOpen,
-                  builder: (context, widget) {
-                    if (isOpen.value) {
-                      return Column(
-                        children: const [
-                          MessageListItemWidget(),
-                          MessageListItemWidget(),
-                        ],
-                      );
-                    }
-                    return const SizedBox.shrink();
-                  },
-                )
-              ],
+                      AnimatedRotation(
+                        turns: isOpen.value ? turns += 0.5 : turns += 0.5,
+                        duration: const Duration(milliseconds: 200),
+                        child: Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          color: colorsTheme.onPrimary,
+                          size: screenSize.width * (18 / 375),
+                        ),
+                      )
+                    ],
+                  ),
+                  AnimatedBuilder(
+                    animation: isOpen,
+                    builder: (context, widget) {
+                      if (isOpen.value) {
+                        return Column(
+                          children: const [
+                            MessageListItemWidget(),
+                            MessageListItemWidget(),
+                          ],
+                        );
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ),

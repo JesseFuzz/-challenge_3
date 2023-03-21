@@ -35,7 +35,7 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
               height: screenSize.width * (40 / screenSizeWidth),
               width: screenSize.width * (40 / screenSizeWidth),
               decoration: BoxDecoration(
-                border: Border.all(color: Color(0xFFF3FC8A)),
+                border: Border.all(color: const Color(0xFFF3FC8A)),
                 color: isCompleted
                     ? const Color(0xFFF3FC8A)
                     : const Color(0xFF1B1D22),
@@ -56,17 +56,17 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Interview with CTO',
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               SizedBox(
                 height: screenSize.width * (6 / screenSizeWidth),
               ),
-              Text('Sep 28, 2022, 14:25 AM',
+              const Text('Sep 28, 2022, 14:25 AM',
                   style: TextStyle(
                     color: Colors.grey,
-                  ))
+                  ),)
             ],
           )
         ],

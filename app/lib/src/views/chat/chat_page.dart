@@ -1,8 +1,6 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils/routes/app_routes.dart';
-
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
 

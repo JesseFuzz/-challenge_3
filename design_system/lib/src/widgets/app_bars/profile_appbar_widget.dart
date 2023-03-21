@@ -13,60 +13,62 @@ class ProfileWidgetAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
-    return Container(
-      height: screenSize.width * (98 / 375),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: customColorTheme.primaryVariant,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+    return SafeArea(
+      child: Container(
+        height: screenSize.width * (98 / 375),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: customColorTheme.primaryVariant,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
         ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: customColorTheme.onSurface,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.person,
-                color: customColorTheme.onPrimary,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: customColorTheme.onSurface,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.person,
+                  color: customColorTheme.onPrimary,
+                ),
               ),
             ),
-          ),
-          Text(
-            'Russel Hue',
-            style: TextStyle(color: customColorTheme.onPrimary),
-          ),
-          Container(
-            alignment: Alignment.center,
-            height: screenSize.width * (40 / 375),
-            width: screenSize.width * (116 / 375),
-            decoration: BoxDecoration(
-              color: customColorTheme.primary,
-              borderRadius: BorderRadius.circular(14),
+            Text(
+              'Russel Hue',
+              style: TextStyle(color: customColorTheme.onPrimary),
             ),
-            child: Text(
-              'Agree to Offer',
-              style: TextStyle(
-                color: customColorTheme.onPrimary,
+            Container(
+              alignment: Alignment.center,
+              height: screenSize.width * (40 / 375),
+              width: screenSize.width * (116 / 375),
+              decoration: BoxDecoration(
+                color: customColorTheme.primary,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Text(
+                'Agree to Offer',
+                style: TextStyle(
+                  color: customColorTheme.onPrimary,
+                ),
               ),
             ),
-          ),
-          Icon(
-            Icons.emoji_emotions_outlined,
-            color: customColorTheme.onPrimary,
-          ),
-          Icon(
-            Icons.emoji_objects_outlined,
-            color: customColorTheme.onPrimary,
-          ),
-        ],
+            Icon(
+              Icons.emoji_emotions_outlined,
+              color: customColorTheme.onPrimary,
+            ),
+            Icon(
+              Icons.emoji_objects_outlined,
+              color: customColorTheme.onPrimary,
+            ),
+          ],
+        ),
       ),
     );
   }
