@@ -7,8 +7,13 @@ class CustomTextTheme extends ThemeExtension<CustomTextTheme> {
   final double? subtitle1;
   final double? subtitle2;
 
-  CustomTextTheme(
-      {this.h6, this.caption, this.subtitle1, this.subtitle2, this.h5});
+  CustomTextTheme({
+    this.h6,
+    this.caption,
+    this.subtitle1,
+    this.subtitle2,
+    this.h5,
+  });
 
   @override
   ThemeExtension<CustomTextTheme> copyWith() {

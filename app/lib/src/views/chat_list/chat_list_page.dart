@@ -14,6 +14,7 @@ class _ChatListPageState extends State<ChatListPage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
+    final customTextTheme = Theme.of(context).extension<CustomTextTheme>()!;
     final optionsModel = OptionsModelMock.getOptions();
     return Scaffold(
       backgroundColor: customColorTheme.primary,
@@ -32,11 +33,73 @@ class _ChatListPageState extends State<ChatListPage> {
                 ),
               ),
             ),
-            const CustomExpansionTileWidget(),
-            const CustomExpansionTileWidget(),
-            const CustomExpansionTileWidget(),
-            const CustomExpansionTileWidget(),
-            const CustomExpansionTileWidget(),
+            Column(
+              children: [
+                AnimatedExpansionContainer(
+                  isExpanded: true,
+                  title: Text(
+                    'Unread',
+                    style: TextStyle(
+                      color: customColorTheme.onPrimary,
+                      fontSize: customTextTheme.subtitle2,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: customColorTheme.onPrimary,
+                  ),
+                  children: Column(
+                    children: const [
+                      MessageListItemWidget(),
+                      MessageListItemWidget(),
+                      MessageListItemWidget(),
+                    ],
+                  ),
+                ),
+                AnimatedExpansionContainer(
+                  isExpanded: false,
+                  title: Text(
+                    'From team',
+                    style: TextStyle(
+                      color: customColorTheme.onPrimary,
+                      fontSize: customTextTheme.subtitle2,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: customColorTheme.onPrimary,
+                  ),
+                  children: Column(
+                    children: const [
+                      MessageListItemWidget(),
+                      MessageListItemWidget(),
+                      MessageListItemWidget(),
+                    ],
+                  ),
+                ),
+                AnimatedExpansionContainer(
+                  isExpanded: true,
+                  title: Text(
+                    'From companies',
+                    style: TextStyle(
+                      color: customColorTheme.onPrimary,
+                      fontSize: customTextTheme.subtitle2,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: customColorTheme.onPrimary,
+                  ),
+                  children: Column(
+                    children: const [
+                      MessageListItemWidget(),
+                      MessageListItemWidget(),
+                      MessageListItemWidget(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

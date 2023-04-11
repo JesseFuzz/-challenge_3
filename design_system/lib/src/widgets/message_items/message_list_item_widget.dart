@@ -28,7 +28,7 @@ class _MessageListItemWidgetState extends State<MessageListItemWidget> {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  AppRoutes().profilePage,
+                  AppRoutes.profilePage,
                 );
               },
               child: Stack(
@@ -80,7 +80,7 @@ class _MessageListItemWidgetState extends State<MessageListItemWidget> {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  AppRoutes().chatPage,
+                  AppRoutes.chatPage,
                 );
               },
               child: SizedBox(
@@ -100,7 +100,7 @@ class _MessageListItemWidgetState extends State<MessageListItemWidget> {
                         SizedBox(
                           width: screenSize.width * (8 / 375),
                         ),
-                        OnlineBadgeWidget(isOnline: true)
+                        const OnlineBadgeWidget(isOnline: true)
                       ],
                     ),
                     SizedBox(

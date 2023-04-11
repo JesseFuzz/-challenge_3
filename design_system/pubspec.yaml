@@ -14,6 +14,7 @@ dependencies:
   google_fonts: ^4.0.3
   app:
     path: ../app
+  flutter_slidable: ^1.2.0
 
 dev_dependencies:
   flutter_test:

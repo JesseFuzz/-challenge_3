@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ToDoModel {
-  final String id;
   final String title;
   final String description;
   final bool isCompleted;
@@ -9,7 +8,6 @@ class ToDoModel {
   final TimeOfDay time;
 
   ToDoModel({
-    required this.id,
     required this.title,
     required this.description,
     required this.date,
@@ -20,7 +18,6 @@ class ToDoModel {
   Map<String, dynamic> toMap() {
     final data = <String, dynamic>{};
 
-    data['id'] = id;
     data['title'] = title;
     data['description'] = description;
     data['isCompleted'] = isCompleted;
@@ -34,7 +31,6 @@ class ToDoModel {
 
   factory ToDoModel.fromMap(Map<String, dynamic> json) {
     return ToDoModel(
-      id: json['id'],
       title: json['title'],
       description: json['description'],
       date: json['date'],

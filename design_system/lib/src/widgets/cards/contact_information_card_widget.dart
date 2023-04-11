@@ -19,7 +19,7 @@ class _ContactInformationCardWidgetState
     final screenSize = MediaQuery.of(context).size;
     final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
     final customTextTheme = Theme.of(context).extension<CustomTextTheme>()!;
-    final ContactModel = ContactModelMock.getContacts();
+    final contactModel = ContactModelMock.getContacts();
 
     return Container(
       height: screenSize.width * (436 / 375),
