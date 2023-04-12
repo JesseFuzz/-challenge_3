@@ -49,7 +49,8 @@ class _AddTaskButtonWidgetState extends State<AddTaskButtonWidget> {
                   setState(() => dateTime = date);
                 },
                 child: Text(
-                    'Selecione a data:  ${dateTime.day}/${dateTime.month}'),
+                  'Selecione a data:  ${dateTime.day}/${dateTime.month}',
+                ),
               ),
               const Spacer(),
               ElevatedButton(

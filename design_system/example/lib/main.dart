@@ -177,7 +177,7 @@ class HotreloadWidgetbook extends StatelessWidget {
                   builder: (context) => Container(
                     height: 100,
                     width: 100,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.all(Radius.circular(50)),
                     ),

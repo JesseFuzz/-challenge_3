@@ -1,9 +1,6 @@
+import 'package:app/src/repository/to_do_repository.dart';
 import 'package:app/src/services/hive_local_storage_service.dart';
-import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
-
-import '../../../models/to_do_model.dart';
-import '../../../statics/strings.dart';
 
 class BottomSheetWidget extends StatefulWidget {
   const BottomSheetWidget({super.key});
@@ -59,8 +56,6 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
-    final customTextTheme = Theme.of(context).extension<CustomTextTheme>()!;
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Form(
@@ -140,21 +135,20 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
+                    const SnackBar(content: Text('adicionado com sucesso')),
                   );
                   _formKey.currentState!.save();
-                  HiveLocalStorageService().post(
-                    StaticStrings.todoHiveBoxName,
-                    ToDoModel(
-                      id: '1',
-                      title: title,
-                      description: description,
-                      isCompleted: false,
-                      date: _date,
-                      time: _time,
-                    ).toMap(),
+
+                  ToDoRepository(
+                    HiveLocalStorageService(),
+                  ).createToDo(
+                    title: title,
+                    description: description,
+                    date: _date,
+                    time: _time,
                   );
                   _formKey.currentState!.reset();
+                  Navigator.pop(context);
                 }
               },
             ),

@@ -1,50 +1,49 @@
 import 'package:app/src/statics/strings.dart';
-
 import 'package:hive_flutter/adapters.dart';
-
 import '../interfaces/i_local_storage_service.dart';
 
 class HiveLocalStorageService implements ILocalStorageService {
   @override
   Future<void> initDatabase() async {
-    //qual dois dois utilizar?
     await Hive.initFlutter();
     await Hive.openBox(StaticStrings.todoHiveBoxName);
-    // final directory = await getApplicationDocumentsDirectory();
-    // // final directory = Directory.current.path;
-    // Hive.init(directory.path);
+  }
+
+  @override
+  Box<dynamic> getDBChange(String table) {
+    final myData = Hive.box(table);
+    return myData;
   }
 
   @override
   Future<void> post(String box, Map todo) async {
     final myData = Hive.box(box);
-    final teste = await myData.add(todo);
-    print(teste);
-    print(myData.values);
-    print(myData.keys);
+    await myData.add(todo);
   }
 
   @override
-  Future<void> get() {
-    throw UnimplementedError();
+  Future<void> delete(String box, int index) async {
+    final myData = Hive.box(box);
+    await myData.deleteAt(index);
+  }
+
+  @override
+  Map<String, dynamic> getAt(String box, int index) {
+    final myData = Hive.box(box);
+    final result = myData.getAt(index);
+    final parsedResult = Map<String, dynamic>.from(result);
+    return parsedResult;
+  }
+
+  @override
+  Map<String, dynamic> getAll(String box) {
+    final myData = Hive.box(box);
+    return myData.values.toList() as Map<String, dynamic>;
   }
 
   // @override
-  // Future<void> dispose() async {
-  //   await Hive.close();
-  // }
-
-  // @override
-  // Future<void> update() {
-  //   throw UnimplementedError();
-  // }
-
-  // @override
-  // void verifyListData() {
-  //   final myBox = Hive.box(StaticStrings.todoHiveBoxName);
-  //   final todoHiveList = myBox.get(StaticStrings.todoHiveBoxMapKey);
-  //   if (todoHiveList is! List) {
-  //     myBox.put(StaticStrings.todoHiveBoxMapKey, []);
-  //   }
+  // Future<void> update(String box, int index, Map todo) async {
+  //   final myData = Hive.box(box);
+  //   await myData.putAt(index, todo);
   // }
 }
