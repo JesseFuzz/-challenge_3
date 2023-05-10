@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-
 import '../interfaces/i_local_storage_service.dart';
 import '../models/to_do_model.dart';
 import '../statics/strings.dart';
@@ -11,22 +9,23 @@ class ToDoRepository {
   ToDoRepository(this._localStorageService);
 
   Future<void> createToDo({
+    required String id,
     required String title,
     required String description,
     required DateTime date,
     required TimeOfDay time,
   }) async {
-    final toDo = ToDoModel(
-      title: title,
-      description: description,
-      date: date,
-      time: time,
-      isCompleted: false,
-    );
-
+    final parsedTime = '${time.hour}:${time.minute}';
     await _localStorageService.post(
       StaticStrings.todoHiveBoxName,
-      toDo.toMap(),
+      {
+        'id': id,
+        'title': title,
+        'description': description,
+        'date': date.toString(),
+        'time': parsedTime,
+        'isCompleted': false,
+      },
     );
   }
 
@@ -37,31 +36,51 @@ class ToDoRepository {
     );
   }
 
-  Map<String, dynamic> getToDo({required String box, required int index}) {
+  ToDoModel getToDo({required String box, required int index}) {
     try {
       final todo = _localStorageService.getAt(
         box,
         index,
       );
       final teste = todo.cast<String, dynamic>();
-      return teste;
-    } catch (e) {
-      print('Error in getToDo: $e');
+      return ToDoModel.fromMap(teste);
+    } on Exception catch (e) {
+      debugPrint('Error in getToDo: $e');
       rethrow;
     }
   }
 
-  Box<dynamic> valueListenable(String table) {
-    final todos = _localStorageService.getDBChange(
-      table,
-    );
-    return todos;
-  }
-}
-
-  // Map<String, dynamic> getAllTodos() {
-  //   final todos = _localStorageService.getAll(
-  //     StaticStrings.todoHiveBoxName,
+  // Box<dynamic> valueListenable(String table) {
+  //   final todos = _localStorageService.getDBChange(
+  //     table,
   //   );
   //   return todos;
   // }
+
+  Future<List<ToDoModel>> getAllTodos() async {
+    final todos = await _localStorageService.getAll(
+      StaticStrings.todoHiveBoxName,
+    );
+    final todosList = todos.map((e) {
+      final teste = Map<String, dynamic>.from(e);
+      // final teste = e.cast<String, dynamic>();
+      //não usar cast, usar .from
+      return ToDoModel.fromMap(teste);
+    }).toList();
+    return todosList;
+  }
+
+  Future<void> updateToDo({
+    required int index,
+    required bool isCompleted,
+    required ToDoModel todo,
+  }) async {
+    await _localStorageService.update(
+      StaticStrings.todoHiveBoxName,
+      index,
+      {
+        'isCompleted': isCompleted,
+      },
+    );
+  }
+}

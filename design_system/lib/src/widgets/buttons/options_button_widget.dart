@@ -1,6 +1,5 @@
 import 'package:app/main.dart';
 import 'package:flutter/material.dart';
-
 import '../../theme/custom_color_theme.dart';
 import '../../theme/custom_text_theme.dart';
 
@@ -18,7 +17,7 @@ class _OptionButtonWidgetState extends State<OptionButtonWidget> {
     final screenSize = MediaQuery.of(context).size;
     const screenSizeWidth = 375;
     final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
-    final customTextTheme = Theme.of(context).extension<CustomTextTheme>();
+    final customTextTheme = Theme.of(context).extension<CustomTextTheme>()!;
 
     return GestureDetector(
       onTap: () {
@@ -46,17 +45,17 @@ class _OptionButtonWidgetState extends State<OptionButtonWidget> {
             Icon(
               Icons.message_outlined,
               color: widget.optionsModel.isSelected
-                  ? Color.fromARGB(255, 17, 16, 16)
-                  : Color(0xFFB0B2B5),
+                  ? customColorTheme.primary
+                  : customColorTheme.tertiary,
             ),
             SizedBox(width: screenSize.width * (10 / screenSizeWidth)),
             Text(
               widget.optionsModel.name,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: customTextTheme.h6,
                 color: widget.optionsModel.isSelected
-                    ? Color.fromARGB(255, 17, 16, 16)
-                    : Color(0xFFB0B2B5),
+                    ? customColorTheme.primary
+                    : customColorTheme.tertiary,
               ),
             ),
             SizedBox(width: screenSize.width * (4 / screenSizeWidth)),
@@ -66,15 +65,15 @@ class _OptionButtonWidgetState extends State<OptionButtonWidget> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: widget.optionsModel.isSelected
-                    ? const Color(0xFF6958FF)
-                    : Color(0xFF3C3E43),
+                    ? customColorTheme.onSecondaryVariant
+                    : customColorTheme.secondaryVariant,
               ),
               child: Center(
                 child: Text(
                   widget.optionsModel.unreadMessages,
                   style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
+                    fontSize: customTextTheme.caption,
+                    color: customColorTheme.onPrimary,
                   ),
                 ),
               ),

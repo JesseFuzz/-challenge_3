@@ -1,50 +1,83 @@
 import 'package:app/src/repository/to_do_repository.dart';
-import 'package:app/src/services/hive_local_storage_service.dart';
 import 'package:app/src/states/to_do_state.dart';
+import 'package:app/src/utils/sorter/todo_sorter.dart';
 import 'package:flutter/cupertino.dart';
 
-class ToDoStore extends ValueNotifier<ToDoState> {
-  final List<Map<String, dynamic>> _tasks = [];
-  final ToDoRepository _toDoRepository =
-      ToDoRepository(HiveLocalStorageService());
-  ToDoStore() : super(ToDoInitialState());
+import '../models/to_do_model.dart';
 
-  Future getToDoList({required String table, required int index}) async {
+class ToDoStore extends ValueNotifier<ToDoState> {
+  final ToDoRepository _toDoRepository;
+  ToDoStore(this._toDoRepository) : super(ToDoInitialState());
+
+  Future<void> getToDoList() async {
     value = ToDoLoadingState();
     try {
-      final toDoList = _toDoRepository.getToDo(box: table, index: index);
-      _tasks.add(toDoList);
-      value = ToDoSuccessState(toDoMap: toDoList);
-    } catch (e) {
+      await Future.delayed(const Duration(seconds: 2));
+      final todos = await _toDoRepository.getAllTodos();
+
+      final todosSorted = ToDoSorter.sort(todos);
+
+      value = ToDoSuccessState(toDoList: todosSorted);
+    } catch (e, s) {
+      debugPrintStack(stackTrace: s);
       value = ToDoErrorState(message: e.toString());
     }
   }
 
-  //   Map<String, dynamic> getToDoList({required String box, required int index}) {
-  //   final toDoList = _toDoRepository.getToDo(box: box, index: index);
-  //   return toDoList;
-  // }
+  Future<void> addToDoItem({required Map<String, dynamic> todo}) async {
+    try {
+      await _toDoRepository.createToDo(
+        id: todo['id'],
+        title: todo['title'],
+        description: todo['description'],
+        date: todo['date'],
+        time: todo['time'],
+      );
 
-  void deleteToDoItem({required int index}) {
-    _toDoRepository.deleteToDo(index: index);
+      await getToDoList();
+    } catch (e) {
+      value = ToDoErrorState(message: e.toString());
+      rethrow;
+    }
   }
 
-  // void add(ToDoModel toDoModel) {
-  //   final toDoList = value as List<ToDoModel>;
-  //   toDoList.add(toDoModel);
-  //   value = toDoList;
-  // }
+  void deleteToDoItem({required ToDoModel todo}) {
+    try {
+      final id = todo.id;
+      final index = _findToDoIndex(id);
 
-  // void remove(ToDoModel toDoModel) {
-  //   final toDoList = value as List<ToDoModel>;
-  //   toDoList.remove(toDoModel);
-  //   value = toDoList;
-  // }
+      if (index == null) {
+        return;
+      }
+      _toDoRepository.deleteToDo(index: index);
+      getToDoList();
+    } catch (e) {
+      value = ToDoErrorState(message: e.toString());
+      rethrow;
+    }
+  }
 
-  // void update(ToDoModel toDoModel) {
-  //   final toDoList = value as List<ToDoModel>;
-  //   final index = toDoList.indexWhere((element) => element.id == toDoModel.id);
-  //   toDoList[index] = toDoModel;
-  //   value = toDoList;
-  // }
+  void updateToDoItem({
+    required String id,
+    required ToDoModel todo,
+  }) {
+    final index = _findToDoIndex(id);
+
+    if (index == null) {
+      return;
+    }
+    _toDoRepository.updateToDo(index: index, todo: todo, isCompleted: true);
+    getToDoList();
+  }
+
+  int? _findToDoIndex(String id) {
+    int? index;
+    final state = value;
+    if (state is ToDoSuccessState) {
+      final currentToDoList = state.toDoList;
+      index = currentToDoList.indexWhere((element) => element.id == id);
+    }
+
+    return index;
+  }
 }

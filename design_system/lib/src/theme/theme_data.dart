@@ -27,6 +27,12 @@ class MyThemeData {
         surface: const Color(0xFF5852D6),
         //textos ou ícones que ficam em cima de uma cor escura (para destaque)
         onSurface: const Color(0xFF6963DB),
+
+        secondaryVariant: const Color(0xFF3C3E43),
+        onSecondaryVariant: const Color(0xFF6958FF),
+        tertiary: const Color(0xFFB0B2B5),
+        tertiaryVariant: const Color(0xFFB0B2B5),
+        onTertiary: const Color(0xFFB0B2B5),
       )
     ],
   );

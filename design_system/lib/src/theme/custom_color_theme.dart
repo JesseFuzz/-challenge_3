@@ -9,6 +9,12 @@ class CustomColorTheme extends ThemeExtension<CustomColorTheme> {
   final Color onSurface;
   final Color onSecondary;
 
+  final Color secondaryVariant;
+  final Color onSecondaryVariant;
+  final Color tertiary;
+  final Color tertiaryVariant;
+  final Color onTertiary;
+
   CustomColorTheme({
     required this.onSurface,
     required this.primary,
@@ -17,6 +23,11 @@ class CustomColorTheme extends ThemeExtension<CustomColorTheme> {
     required this.onPrimary,
     required this.surface,
     required this.onSecondary,
+    required this.secondaryVariant,
+    required this.onSecondaryVariant,
+    required this.tertiary,
+    required this.tertiaryVariant,
+    required this.onTertiary,
   });
 
   @override

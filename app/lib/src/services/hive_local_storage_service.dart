@@ -9,11 +9,11 @@ class HiveLocalStorageService implements ILocalStorageService {
     await Hive.openBox(StaticStrings.todoHiveBoxName);
   }
 
-  @override
-  Box<dynamic> getDBChange(String table) {
-    final myData = Hive.box(table);
-    return myData;
-  }
+  // @override
+  // Box<dynamic> getDBChange(String table) {
+  //   final myData = Hive.box(table);
+  //   return myData;
+  // }
 
   @override
   Future<void> post(String box, Map todo) async {
@@ -36,14 +36,20 @@ class HiveLocalStorageService implements ILocalStorageService {
   }
 
   @override
-  Map<String, dynamic> getAll(String box) {
+  Future<List<Map<String, dynamic>>> getAll(String box) async {
     final myData = Hive.box(box);
-    return myData.values.toList() as Map<String, dynamic>;
+    // await myData.clear();
+    final result = myData.values;
+    final parsedResult =
+        // ignore: unnecessary_lambdas
+        result.map((e) => Map<String, dynamic>.from(e)).toList();
+    return parsedResult;
   }
 
-  // @override
-  // Future<void> update(String box, int index, Map todo) async {
-  //   final myData = Hive.box(box);
-  //   await myData.putAt(index, todo);
-  // }
+  @override
+  Future<void> update(String box, int index, Map todo) async {
+    final myData = Hive.box(box);
+    // final parsedId = int.parse(index);
+    await myData.putAt(index, todo);
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ToDoModel {
+  final String id;
   final String title;
   final String description;
   final bool isCompleted;
@@ -8,6 +9,7 @@ class ToDoModel {
   final TimeOfDay time;
 
   ToDoModel({
+    required this.id,
     required this.title,
     required this.description,
     required this.date,
@@ -18,6 +20,7 @@ class ToDoModel {
   Map<String, dynamic> toMap() {
     final data = <String, dynamic>{};
 
+    data['id'] = id;
     data['title'] = title;
     data['description'] = description;
     data['isCompleted'] = isCompleted;
@@ -30,21 +33,41 @@ class ToDoModel {
 //how to convert millisecondsSinceEpoch to DateTime flutter
 
   factory ToDoModel.fromMap(Map<String, dynamic> json) {
+    DateTime parsedDateTime;
+    try {
+      parsedDateTime = DateTime.parse(json['date'].toString());
+    } catch (e) {
+      parsedDateTime = DateTime.now();
+    }
+
+    final timeToString = json['time'].toString();
+
+    final splitted = timeToString.split(':');
+    var hour = splitted[0];
+    var minute = splitted[1];
+
+    if (hour.length < 2) {
+      hour = '0$hour';
+    }
+    if (minute.length < 2) {
+      minute = '0$minute';
+    }
+
+    // hour = timeToString.substring(0, 2);
+    // minute = timeToString.substring(3, 5);
+
+    final parsedTime = TimeOfDay(
+      hour: int.parse(hour),
+      minute: int.parse(minute),
+    );
+
     return ToDoModel(
+      id: json['id'],
       title: json['title'],
       description: json['description'],
-      date: json['date'],
-      time: json['time'],
+      date: parsedDateTime,
+      time: parsedTime,
       isCompleted: json['isCompleted'],
     );
   }
 }
-
-// {
-//     "title": "teste",
-//     "description": "teste",
-//     "isCompleted": false,
-//     "date": "2023-03-13 00:00:00.000",
-//     "time": "19:30"
-// }
-// flutter packages pub run build_runner build --delete-conflicting-outputs

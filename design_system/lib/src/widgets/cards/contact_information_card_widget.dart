@@ -1,4 +1,3 @@
-import 'package:app/main.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +18,6 @@ class _ContactInformationCardWidgetState
     final screenSize = MediaQuery.of(context).size;
     final customColorTheme = Theme.of(context).extension<CustomColorTheme>()!;
     final customTextTheme = Theme.of(context).extension<CustomTextTheme>()!;
-    final contactModel = ContactModelMock.getContacts();
 
     return Container(
       height: screenSize.width * (436 / 375),

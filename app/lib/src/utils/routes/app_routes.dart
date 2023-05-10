@@ -1,3 +1,6 @@
+import 'package:app/src/repository/to_do_repository.dart';
+import 'package:app/src/services/hive_local_storage_service.dart';
+import 'package:app/src/stores/to_do_store.dart';
 import 'package:flutter/material.dart';
 import '../../views/chat/chat_page.dart';
 import '../../views/chat_list/chat_list_page.dart';
@@ -10,7 +13,9 @@ class AppRoutes {
 
   static Map<String, Widget Function(BuildContext)> pages() {
     final pages = <String, Widget Function(BuildContext)>{
-      profilePage: (context) => const ProfilePage(),
+      profilePage: (context) => ProfilePage(
+            store: ToDoStore(ToDoRepository(HiveLocalStorageService())),
+          ),
       chatListPage: (context) => const ChatListPage(),
       chatPage: (context) => const ChatPage(),
     };

@@ -1,9 +1,10 @@
-import 'package:app/src/repository/to_do_repository.dart';
-import 'package:app/src/services/hive_local_storage_service.dart';
 import 'package:flutter/material.dart';
 
+import '../../../stores/to_do_store.dart';
+
 class BottomSheetWidget extends StatefulWidget {
-  const BottomSheetWidget({super.key});
+  final ToDoStore store;
+  const BottomSheetWidget({super.key, required this.store});
 
   @override
   State<BottomSheetWidget> createState() => _BottomSheetWidgetState();
@@ -138,14 +139,14 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                     const SnackBar(content: Text('adicionado com sucesso')),
                   );
                   _formKey.currentState!.save();
-
-                  ToDoRepository(
-                    HiveLocalStorageService(),
-                  ).createToDo(
-                    title: title,
-                    description: description,
-                    date: _date,
-                    time: _time,
+                  widget.store.addToDoItem(
+                    todo: {
+                      'id': DateTime.now().millisecond.toString(),
+                      'title': title,
+                      'description': description,
+                      'date': _date,
+                      'time': _time,
+                    },
                   );
                   _formKey.currentState!.reset();
                   Navigator.pop(context);

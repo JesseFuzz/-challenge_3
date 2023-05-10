@@ -1,4 +1,4 @@
 class StaticStrings {
   static const todoHiveBoxName = 'myBox';
-  static const todoHiveBoxMapKey = 'todos';
+  // static const todoHiveBoxMapKey = 'todos';
 }
