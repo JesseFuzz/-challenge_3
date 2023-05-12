@@ -14,6 +14,7 @@ class CustomColorTheme extends ThemeExtension<CustomColorTheme> {
   final Color tertiary;
   final Color tertiaryVariant;
   final Color onTertiary;
+  final Color danger;
 
   CustomColorTheme({
     required this.onSurface,
@@ -28,6 +29,7 @@ class CustomColorTheme extends ThemeExtension<CustomColorTheme> {
     required this.tertiary,
     required this.tertiaryVariant,
     required this.onTertiary,
+    required this.danger,
   });
 
   @override

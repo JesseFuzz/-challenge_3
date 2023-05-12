@@ -13,9 +13,7 @@ class ToDoRepository {
     required String title,
     required String description,
     required DateTime date,
-    required TimeOfDay time,
   }) async {
-    final parsedTime = '${time.hour}:${time.minute}';
     await _localStorageService.post(
       StaticStrings.todoHiveBoxName,
       {
@@ -23,7 +21,6 @@ class ToDoRepository {
         'title': title,
         'description': description,
         'date': date.toString(),
-        'time': parsedTime,
         'isCompleted': false,
       },
     );
@@ -42,20 +39,13 @@ class ToDoRepository {
         box,
         index,
       );
-      final teste = todo.cast<String, dynamic>();
-      return ToDoModel.fromMap(teste);
+      final parsedToDo = todo.cast<String, dynamic>();
+      return ToDoModel.fromMap(parsedToDo);
     } on Exception catch (e) {
       debugPrint('Error in getToDo: $e');
       rethrow;
     }
   }
-
-  // Box<dynamic> valueListenable(String table) {
-  //   final todos = _localStorageService.getDBChange(
-  //     table,
-  //   );
-  //   return todos;
-  // }
 
   Future<List<ToDoModel>> getAllTodos() async {
     final todos = await _localStorageService.getAll(
@@ -79,7 +69,11 @@ class ToDoRepository {
       StaticStrings.todoHiveBoxName,
       index,
       {
-        'isCompleted': isCompleted,
+        'id': todo.id,
+        'title': todo.title,
+        'description': todo.description,
+        'date': todo.date.toString(),
+        'isCompleted': !isCompleted,
       },
     );
   }

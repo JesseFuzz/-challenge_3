@@ -11,8 +11,9 @@ class BottomSheetWidget extends StatefulWidget {
 }
 
 class _BottomSheetWidgetState extends State<BottomSheetWidget> {
-  DateTime _date = DateTime.now();
-  TimeOfDay _time = TimeOfDay.now();
+  DateTime dateTimeDate = DateTime.now();
+  TimeOfDay dateTimeTime = TimeOfDay.now();
+
   final _formKey = GlobalKey<FormState>();
 
   Future<void> _showDatePicker() async {
@@ -25,7 +26,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
       (value) {
         setState(
           () {
-            _date = value!;
+            dateTimeDate = DateTime(value!.year, value.month, value.day);
           },
         );
       },
@@ -44,7 +45,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
       }) {
         setState(
           () {
-            _time = value!;
+            dateTimeTime = TimeOfDay(hour: value!.hour, minute: value.minute);
           },
         );
       },
@@ -107,7 +108,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                         children: [
                           const Icon(Icons.calendar_today),
                           Text(
-                            '${_date.day}/${_date.month}/${_date.year}',
+                            '${dateTimeDate.day}/${dateTimeDate.month}/${dateTimeDate.year}',
                           ),
                         ],
                       ),
@@ -123,7 +124,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                     children: [
                       const Icon(Icons.timer),
                       Text(
-                        '${_time.hour}:${_time.minute}',
+                        '${dateTimeTime.hour}:${dateTimeTime.minute}',
                       ),
                     ],
                   ),
@@ -144,8 +145,13 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                       'id': DateTime.now().millisecond.toString(),
                       'title': title,
                       'description': description,
-                      'date': _date,
-                      'time': _time,
+                      'date': DateTime(
+                        dateTimeDate.year,
+                        dateTimeDate.month,
+                        dateTimeDate.day,
+                        dateTimeTime.hour,
+                        dateTimeTime.minute,
+                      )
                     },
                   );
                   _formKey.currentState!.reset();

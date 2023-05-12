@@ -28,7 +28,7 @@ class _ContactInformationCardWidgetState
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 18, right: 32, top: 56),
+            padding: const EdgeInsets.only(left: 18, right: 32, top: 40),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -52,6 +52,7 @@ class _ContactInformationCardWidgetState
             ),
           ),
           const ProfileIconWidget(photoHeight: 80, photoWidth: 78),
+          SizedBox(height: screenSize.width * (10 / 375)),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -81,29 +82,34 @@ class _ContactInformationCardWidgetState
               CallButtonWidget(
                 icon: Icon(
                   Icons.phone_in_talk,
+                  size: 32,
                   color: customColorTheme.onPrimary,
                 ),
               ),
               CallButtonWidget(
                 icon: Icon(
                   Icons.video_camera_back_outlined,
+                  size: 32,
                   color: customColorTheme.onPrimary,
                 ),
               ),
               CallButtonWidget(
                 icon: Icon(
                   Icons.message_outlined,
+                  size: 32,
                   color: customColorTheme.onPrimary,
                 ),
               ),
               CallButtonWidget(
                 icon: Icon(
                   Icons.folder_copy_outlined,
+                  size: 32,
                   color: customColorTheme.onPrimary,
                 ),
               ),
             ],
           ),
+          SizedBox(height: screenSize.width * (6 / 375)),
           Text(
             'Hello Everybody 👋',
             style: TextStyle(
@@ -111,6 +117,7 @@ class _ContactInformationCardWidgetState
               fontSize: customTextTheme.subtitle1,
             ),
           ),
+          SizedBox(height: screenSize.width * (6 / 375)),
           Text(
             'Our company are looking for:',
             style: TextStyle(
@@ -118,6 +125,7 @@ class _ContactInformationCardWidgetState
               fontSize: customTextTheme.subtitle1,
             ),
           ),
+          SizedBox(height: screenSize.width * (10 / 375)),
           Wrap(
             spacing: screenSize.width * (8 / 375),
             runSpacing: screenSize.width * (8 / 375),

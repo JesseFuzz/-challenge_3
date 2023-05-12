@@ -1,3 +1,4 @@
+// ignore: implementation_imports
 import 'package:app/src/models/to_do_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -52,8 +53,7 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
           SlidableAction(
             onPressed: widget.onDelete,
             icon: Icons.delete,
-            backgroundColor: Colors.red.shade500,
-            //borda circular pra ficar igual o container abaixo
+            backgroundColor: customColorTheme.danger,
             borderRadius: BorderRadius.circular(12),
           )
         ],
@@ -67,7 +67,7 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
           right: screenSize.width * (12 / screenSizeWidth),
         ),
         decoration: BoxDecoration(
-          color: Color(0xFF1B1D22),
+          color: customColorTheme.primaryVariant,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
@@ -82,26 +82,27 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
                 width: screenSize.width * (40 / screenSizeWidth),
                 decoration: BoxDecoration(
                   border: Border.all(color: customColorTheme.secondary),
-                  color: isCompleted ? Colors.green : Colors.red,
+                  color: isCompleted
+                      ? customColorTheme.secondary
+                      : customColorTheme.primaryVariant,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(
                   Icons.check,
-                  color: Color(0xFF1B1D22),
+                  color: customColorTheme.primaryVariant,
                 ),
               ),
             ),
-            // Checkbox(
-            //   value: true,
-            //   onChanged: (value) {},
-            // ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   widget.toDo.title,
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(
+                    color: customColorTheme.onPrimary,
+                    fontSize: customTextTheme.h6,
+                  ),
                 ),
                 SizedBox(
                   height: screenSize.width * (6 / screenSizeWidth),
@@ -109,7 +110,7 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
                 Text(
                   widget.toDo.description,
                   style: TextStyle(
-                    color: Colors.grey,
+                    color: customColorTheme.tertiary,
                   ),
                 ),
                 Row(
@@ -118,19 +119,19 @@ class _TaskItemWidgetState extends State<TaskItemWidget> {
                       DateTimeParser.toStringAsDDMMYYYY(widget.toDo.date),
                       style: TextStyle(
                         color: widget.toDo.date.isAfter(DateTime.now())
-                            ? Colors.white
-                            : Colors.red,
+                            ? customColorTheme.onPrimary
+                            : customColorTheme.danger,
                       ),
                     ),
                     const SizedBox(
                       width: 10,
                     ),
                     Text(
-                      DateTimeParser.toStringAsHHMM(widget.toDo.time),
+                      '${widget.toDo.date.hour}:${widget.toDo.date.minute}',
                       style: TextStyle(
                         color: widget.toDo.date.isAfter(DateTime.now())
-                            ? Colors.white
-                            : Colors.red,
+                            ? customColorTheme.onPrimary
+                            : customColorTheme.danger,
                       ),
                     ),
                   ],

@@ -33,6 +33,7 @@ class MyThemeData {
         tertiary: const Color(0xFFB0B2B5),
         tertiaryVariant: const Color(0xFFB0B2B5),
         onTertiary: const Color(0xFFB0B2B5),
+        danger: const Color(0xFFB00020),
       )
     ],
   );

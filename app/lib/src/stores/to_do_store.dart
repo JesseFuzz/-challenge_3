@@ -31,7 +31,6 @@ class ToDoStore extends ValueNotifier<ToDoState> {
         title: todo['title'],
         description: todo['description'],
         date: todo['date'],
-        time: todo['time'],
       );
 
       await getToDoList();
@@ -66,7 +65,13 @@ class ToDoStore extends ValueNotifier<ToDoState> {
     if (index == null) {
       return;
     }
-    _toDoRepository.updateToDo(index: index, todo: todo, isCompleted: true);
+
+    final isCompleted = todo.isCompleted;
+    _toDoRepository.updateToDo(
+      index: index,
+      todo: todo,
+      isCompleted: isCompleted,
+    );
     getToDoList();
   }
 
@@ -77,7 +82,6 @@ class ToDoStore extends ValueNotifier<ToDoState> {
       final currentToDoList = state.toDoList;
       index = currentToDoList.indexWhere((element) => element.id == id);
     }
-
     return index;
   }
 }

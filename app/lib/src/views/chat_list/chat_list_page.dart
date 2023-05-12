@@ -51,7 +51,9 @@ class _ChatListPageState extends State<ChatListPage> {
                   children: Column(
                     children: const [
                       MessageListItemWidget(),
+                      SizedBox(height: 10),
                       MessageListItemWidget(),
+                      SizedBox(height: 10),
                       MessageListItemWidget(),
                     ],
                   ),
@@ -70,10 +72,13 @@ class _ChatListPageState extends State<ChatListPage> {
                     color: customColorTheme.onPrimary,
                   ),
                   children: Column(
-                    children: const [
-                      MessageListItemWidget(),
-                      MessageListItemWidget(),
-                      MessageListItemWidget(),
+                    children: [
+                      const MessageListItemWidget(),
+                      SizedBox(height: screenSize.width * (10 / 375)),
+                      const MessageListItemWidget(),
+                      SizedBox(height: screenSize.width * (10 / 375)),
+                      const MessageListItemWidget(),
+                      SizedBox(height: screenSize.width * (10 / 375)),
                     ],
                   ),
                 ),
@@ -91,10 +96,13 @@ class _ChatListPageState extends State<ChatListPage> {
                     color: customColorTheme.onPrimary,
                   ),
                   children: Column(
-                    children: const [
-                      MessageListItemWidget(),
-                      MessageListItemWidget(),
-                      MessageListItemWidget(),
+                    children: [
+                      const MessageListItemWidget(),
+                      SizedBox(height: screenSize.width * (10 / 375)),
+                      const MessageListItemWidget(),
+                      SizedBox(height: screenSize.width * (10 / 375)),
+                      const MessageListItemWidget(),
+                      SizedBox(height: screenSize.width * (10 / 375)),
                     ],
                   ),
                 ),
